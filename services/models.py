@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 """ Set UTF-8 enconding """
 
 from __future__ import unicode_literals
