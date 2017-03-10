@@ -40,6 +40,7 @@ LOPD_OPTION_CHOICES = Choices(
     ('CEJAS_Y_PESTANAS', 'Cejas y pestañas')
 )
 
+
 class Client(models.Model):
     """ Client model. """
     dni = models.CharField(max_length=9, unique=True)
