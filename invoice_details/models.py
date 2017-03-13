@@ -24,8 +24,8 @@ class InvoiceDetail(models.Model):
         Invoice,
         on_delete=models.CASCADE,
         primary_key=True)
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    service = models.ManyToManyField(Service)
+    product = models.ManyToManyField(Product)
     quantity = models.IntegerField(default=0)
     discount = models.IntegerField(default=0)
     vat = models.IntegerField(

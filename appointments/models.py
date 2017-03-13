@@ -19,7 +19,7 @@ APPOINTMENT_STATES = Choices(
 
 class Appointment(models.Model):
     """ Appointment model. """
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    service = models.ManyToManyField(Service)
     date = models.DateField(auto_now=False, auto_now_add=False)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     state = models.CharField(
@@ -27,5 +27,9 @@ class Appointment(models.Model):
         default=APPOINTMENT_STATES.PENDING,
         max_length=255
     )
-    invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE)
+    invoice = models.OneToOneField(
+        Invoice, 
+        on_delete=models.CASCADE,
+        primary_key=True
+    )
     notes = models.TextField()
