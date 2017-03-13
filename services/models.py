@@ -4,7 +4,6 @@
 
 from __future__ import unicode_literals
 from django.db import models
-from multiselectfield import MultiSelectField
 from model_utils import Choices
 
 CATEGORIES = Choices(
@@ -16,6 +15,7 @@ CATEGORIES = Choices(
     ('TRATAMIENTOS_CORPORALES', 'Tratamientos corporales'),
     ('CEJAS_Y_PESTANAS', 'Cejas y pestañas')
 )
+
 
 class Service(models.Model):
     """ Service model. """

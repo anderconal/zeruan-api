@@ -4,7 +4,6 @@
 
 from __future__ import unicode_literals
 from django.db import models
-from multiselectfield import MultiSelectField
 from model_utils import Choices
 from services.models import Service
 from clients.models import Client
@@ -16,6 +15,7 @@ APPOINTMENT_STATES = Choices(
     ('MODIFIED', 'Modificada'),
     ('FINISHED', 'Finalizada')
 )
+
 
 class Appointment(models.Model):
     """ Appointment model. """
