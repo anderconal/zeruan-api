@@ -78,5 +78,6 @@ class Client(models.Model):
         max_length=255
     )
     notes = models.TextField()
+
     def __unicode__(self):
-       return self.name + ' ' + self.surname + ' ' + self.second_surname
+        return self.name + ' ' + self.surname + ' ' + self.second_surname

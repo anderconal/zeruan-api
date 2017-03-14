@@ -28,5 +28,6 @@ class Service(models.Model):
         max_length=255
     )
     description = models.TextField()
+
     def __unicode__(self):
         return self.category + ': ' + self.name
