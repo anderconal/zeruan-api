@@ -9,5 +9,5 @@ from clients.models import Client
 
 class Invoice(models.Model):
     """ Invoice model. """
-    issueDate = models.DateField(auto_now=False, auto_now_add=False)
+    issueDate = models.DateTimeField(auto_now=False, auto_now_add=False)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)

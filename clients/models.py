@@ -27,7 +27,8 @@ KNOWN_FOR_CHOICES = Choices(
 
 LOPD_CHANNEL_CHOICES = Choices(
     ('WHATSAPP', 'WhatsApp'),
-    ('EMAIL', 'Email')
+    ('EMAIL', 'Email'),
+    ('NONE', 'No LOPD')
 )
 
 LOPD_OPTION_CHOICES = Choices(
@@ -43,24 +44,35 @@ LOPD_OPTION_CHOICES = Choices(
 
 class Client(models.Model):
     """ Client model. """
-    dni = models.CharField(max_length=9, unique=True)
+    dni = models.CharField(max_length=9, unique=True, blank=True, null=True)
     name = models.CharField(max_length=255)
     surname = models.CharField(max_length=255)
-    second_surname = models.CharField(max_length=255)
-    birthdate = models.DateField(auto_now=False, auto_now_add=False)
+    second_surname = models.CharField(max_length=255, blank=True, null=True)
+    birthdate = models.DateField(
+        auto_now=False,
+        auto_now_add=False,
+        blank=True,
+        null=True)
     phone_number = models.CharField(max_length=21)
-    address = models.CharField(max_length=255)
-    postal_code = models.CharField(max_length=5)
-    city = models.CharField(max_length=255)
-    province = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-    release_date = models.DateField(auto_now=False, auto_now_add=False)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    postal_code = models.CharField(max_length=5, blank=True, null=True)
+    city = models.CharField(max_length=255, blank=True, null=True)
+    province = models.CharField(max_length=255, blank=True, null=True)
+    email = models.CharField(max_length=255, blank=True, null=True)
+    release_date = models.DateField(
+        auto_now=False,
+        auto_now_add=False,
+        blank=True, null=True)
     partner = models.CharField(
         choices=PARTNER_OPTIONS,
         default=PARTNER_OPTIONS.NO_PARTNER,
         max_length=255
     )
-    partner_release_date = models.DateField(auto_now=False, auto_now_add=False)
+    partner_release_date = models.DateField(
+        auto_now=False,
+        auto_now_add=False,
+        blank=True, null=True
+    )
     known_for = models.CharField(
         choices=KNOWN_FOR_CHOICES,
         default=KNOWN_FOR_CHOICES.FACEBOOK,
@@ -69,15 +81,17 @@ class Client(models.Model):
     lopd = models.BooleanField(default=False)
     lopd_channel = models.CharField(
         choices=LOPD_CHANNEL_CHOICES,
-        default=LOPD_CHANNEL_CHOICES.WHATSAPP,
+        default=LOPD_CHANNEL_CHOICES.NONE,
         max_length=255
     )
     lopd_options = MultiSelectField(
         choices=LOPD_OPTION_CHOICES,
         default=None,
-        max_length=255
+        max_length=255,
+        blank=True,
+        null=True
     )
-    notes = models.TextField()
+    notes = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
         return self.name + ' ' + self.surname + ' ' + self.second_surname
