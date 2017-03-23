@@ -26,7 +26,7 @@ class Service(models.Model):
         choices=CATEGORIES,
         default=CATEGORIES.FOTODEPILACION,
         max_length=255
-    ) 
+    )
     description = models.TextField()
 
     def __unicode__(self):

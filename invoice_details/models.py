@@ -4,11 +4,11 @@
 
 from __future__ import unicode_literals
 from django.db import models
+from django.utils.translation import gettext as _
 from services.models import Service
 from products.models import Product
 from invoices.models import Invoice
 from model_utils import Choices
-from django.utils.translation import gettext as _
 
 VAT_CHOICES = Choices(
     (21, 'GENERAL', _('GENERAL')),
