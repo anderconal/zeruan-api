@@ -14,6 +14,7 @@ CATEGORIES = Choices(
     ('LINFODRENANTE', 'Linfodrenante'),
     ('PERLAS', 'Perlas'),
     ('PIELES_GRASAS', 'Pieles grasas'),
+    ('PIELES_SENSIBLES', 'Pieles sensibles'),
     ('UNCATEGORIZED', 'Sin categorizar')
 )
 

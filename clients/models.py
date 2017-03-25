@@ -62,7 +62,8 @@ class Client(models.Model):
     release_date = models.DateField(
         auto_now=False,
         auto_now_add=False,
-        blank=True, null=True)
+        blank=True,
+        null=True)
     partner = models.CharField(
         choices=PARTNER_OPTIONS,
         default=PARTNER_OPTIONS.NO_PARTNER,

@@ -29,8 +29,6 @@ class Appointment(models.Model):
     )
     invoice = models.OneToOneField(
         Invoice,
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True
+        on_delete=models.CASCADE
     )
     notes = models.TextField(blank=True, null=True)
