@@ -5,9 +5,13 @@
 from __future__ import unicode_literals
 from django.db import models
 from clients.models import Client
+from invoice_details.models import InvoiceDetail
 
 
 class Invoice(models.Model):
     """ Invoice model. """
+    invoiceDetail = models.ForeignKey(
+        InvoiceDetail,
+        on_delete=models.CASCADE)
     issueDate = models.DateTimeField(auto_now=False, auto_now_add=False)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)

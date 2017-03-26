@@ -7,7 +7,6 @@ from django.db import models
 from django.utils.translation import gettext as _
 from services.models import Service
 from products.models import Product
-from invoices.models import Invoice
 from model_utils import Choices
 
 VAT_CHOICES = Choices(
@@ -20,10 +19,6 @@ VAT_CHOICES = Choices(
 
 class InvoiceDetail(models.Model):
     """ InvoiceDetail model. """
-    invoice = models.OneToOneField(
-        Invoice,
-        on_delete=models.CASCADE,
-        primary_key=True)
     service = models.OneToOneField(
         Service,
         on_delete=models.CASCADE,
