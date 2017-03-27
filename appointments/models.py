@@ -32,3 +32,6 @@ class Appointment(models.Model):
         on_delete=models.CASCADE
     )
     notes = models.TextField(blank=True, null=True)
+
+    def __unicode__(self):
+        return 'APP: ' + str(self.date)
