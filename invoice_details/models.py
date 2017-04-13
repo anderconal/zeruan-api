@@ -43,4 +43,4 @@ class InvoiceDetail(models.Model):
         unique_together = ['invoice', 'id']
 
     def __unicode__(self):
-        return 'IN DE: ' + str(self.invoice.issueDate)
+        return 'Invoice: ' + str(self.invoice.id) + ' Invoice detail: ' + str(self.id)

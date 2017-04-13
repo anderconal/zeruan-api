@@ -13,4 +13,4 @@ class Invoice(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
 
     def __unicode__(self):
-        return 'IN: ' + str(self.issueDate)
+        return 'Invoice: ' + str(self.id)

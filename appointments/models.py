@@ -34,4 +34,4 @@ class Appointment(models.Model):
     notes = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
-        return 'APP: ' + str(self.date)
+        return 'Appointment: ' + str(self.id)
