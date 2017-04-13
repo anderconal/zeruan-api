@@ -58,7 +58,7 @@ class Client(models.Model):
     postal_code = models.CharField(max_length=5, blank=True, null=True)
     city = models.CharField(max_length=255, blank=True, null=True)
     province = models.CharField(max_length=255, blank=True, null=True)
-    email = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(max_length=254, blank=True, null=True)
     release_date = models.DateField(
         auto_now=False,
         auto_now_add=False,
@@ -94,5 +94,5 @@ class Client(models.Model):
     )
     notes = models.TextField(blank=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name + ' ' + self.surname + ' ' + self.second_surname
