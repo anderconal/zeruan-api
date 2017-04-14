@@ -31,7 +31,6 @@ class InvoiceDetail(models.Model):
         null=True)
     product = models.ManyToManyField(Product, blank=True)
     quantity = models.IntegerField(default=0)
-    discount = models.IntegerField(default=0)
     vat = models.IntegerField(
         choices=VAT_CHOICES,
         default=VAT_CHOICES.GENERAL

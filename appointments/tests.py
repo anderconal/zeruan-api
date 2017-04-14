@@ -1,32 +1,15 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
+
 from django.test import TestCase
-from .models import Appointment, APPOINTMENT_STATES
-from services.models import Service, CATEGORIES
 from clients.models import Client, PARTNER_OPTIONS, KNOWN_FOR_CHOICES, LOPD_CHANNEL_CHOICES, LOPD_OPTION_CHOICES
-from .models import Invoice
+from services.models import Service, CATEGORIES
+from invoices.models import Invoice
+from .models import Appointment, APPOINTMENT_STATES
 
 
 class AppointmentsTests(TestCase):
     def setUp(self):
-        Appointment.objects.create(
-            id=1,
-            service=Service.objects.get(name='Maquillaje día'),
-            date=datetime.now(),
-            client=Client.objects.get(dni='12345678t'),
-            state=APPOINTMENT_STATES.PENDING,
-            invoice=Invoice.objects.get(id=1),
-            notes='Test'
-        )
-
-        Service.objects.create(
-            name='Maquillaje día',
-            price=15.00,
-            duration=900,
-            category=CATEGORIES.FOTODEPILACION,
-            description='¿Eres de maquillaje natural o tienes poco tiempo? Entonces esto es para tí, para cualquier ocasión, un toque de luz en tu rostro, un delineado suave, color en tus labios ¡y listo!'
-        )
-
         Client.objects.create(
           dni='12345678t',
           name='Ander',
@@ -49,10 +32,27 @@ class AppointmentsTests(TestCase):
           notes='Test'
         )
 
+        Service.objects.create(
+            name='Maquillaje día',
+            price=15.00,
+            duration=900,
+            category=CATEGORIES.FOTODEPILACION,
+            description='¿Eres de maquillaje natural o tienes poco tiempo? Entonces esto es para tí, para cualquier ocasión, un toque de luz en tu rostro, un delineado suave, color en tus labios ¡y listo!'
+        )
+
         Invoice.objects.create(
-            id=1,
             issueDate=datetime.now(),
             client=Client.objects.get(dni='12345678t')
+        )
+
+        Appointment.objects.create(
+            service=Service.objects.get(name='Maquillaje día'),
+            date=datetime.now(),
+            client=Client.objects.get(dni='12345678t'),
+            state=APPOINTMENT_STATES.PENDING,
+            invoice=Invoice.objects.get(
+                client=Client.objects.get(dni='12345678t')),
+            notes='Test'
         )
 
         def test_string_representation(self):
@@ -60,7 +60,7 @@ class AppointmentsTests(TestCase):
             String representation of Appointment model should be:
             Appointment: (Appointment ID)
             """
-            test_appointment = Appointment.objects.get(id=1)
+            test_appointment = Appointment.objects.get(notes='Test')
 
-            self.assertEqual(str(test_appointment), 'Appointment: ' + 
+            self.assertEqual(str(test_appointment), 'Appointment: ' +
                              test_appointment.id)
