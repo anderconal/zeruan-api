@@ -32,11 +32,11 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'clients.apps.ClientsConfig',
+    'products.apps.ProductConfig',
     'services.apps.ServicesConfig',
-    'appointments.apps.AppointmentsConfig',
     'invoices.apps.InvoicesConfig',
     'invoice_details.apps.InvoiceDetailsConfig',
-    'products.apps.ProductConfig',
+    'appointments.apps.AppointmentsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
