@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 
 from django.test import TestCase
+from django.utils import timezone
 from clients.models import Client, PARTNER_OPTIONS, KNOWN_FOR_CHOICES, LOPD_CHANNEL_CHOICES, LOPD_OPTION_CHOICES
 from services.models import Service, CATEGORIES
 from invoices.models import Invoice
@@ -10,21 +10,21 @@ from .models import Appointment, APPOINTMENT_STATES
 
 class AppointmentsTests(TestCase):
     def setUp(self):
-        Client.objects.create(
+        self.client = Client.objects.create(
           dni='12345678t',
           name='Ander',
           surname='Conal',
           second_surname='Fuertes',
-          birthdate=datetime.now(),
+          birthdate=timezone.now(),
           phone_number='666666666',
           address='Fake Street, 7',
           postal_code='66666',
           city='Bilbao',
           province='Vizcaya',
           email='ander.conal@gmail.com',
-          release_date=datetime.now(),
+          release_date=timezone.now(),
           partner=PARTNER_OPTIONS.NO_PARTNER,
-          partner_release_date=datetime.now(),
+          partner_release_date=timezone.now(),
           known_for=KNOWN_FOR_CHOICES.FACEBOOK,
           lopd=True,
           lopd_channel=LOPD_CHANNEL_CHOICES.WHATSAPP,
@@ -32,7 +32,7 @@ class AppointmentsTests(TestCase):
           notes='Test'
         )
 
-        Service.objects.create(
+        self.service = Service.objects.create(
             name='Maquillaje día',
             price=15.00,
             duration=900,
@@ -40,27 +40,22 @@ class AppointmentsTests(TestCase):
             description='¿Eres de maquillaje natural o tienes poco tiempo? Entonces esto es para tí, para cualquier ocasión, un toque de luz en tu rostro, un delineado suave, color en tus labios ¡y listo!'
         )
 
-        Invoice.objects.create(
-            issueDate=datetime.now(),
-            client=Client.objects.get(dni='12345678t')
+        self.invoice = Invoice.objects.create(
+            issueDate=timezone.now(),
+            client=self.client
         )
 
-        Appointment.objects.create(
-            service=Service.objects.get(name='Maquillaje día'),
-            date=datetime.now(),
-            client=Client.objects.get(dni='12345678t'),
+        self.appointment = Appointment.objects.create(
+            service=self.service,
+            date=timezone.now(),
+            client=self.client,
             state=APPOINTMENT_STATES.PENDING,
-            invoice=Invoice.objects.get(
-                client=Client.objects.get(dni='12345678t')),
+            invoice=self.invoice,
             notes='Test'
         )
 
-        def test_string_representation(self):
-            """
-            String representation of Appointment model should be:
-            Appointment: (Appointment ID)
-            """
-            test_appointment = Appointment.objects.get(notes='Test')
-
-            self.assertEqual(str(test_appointment), 'Appointment: ' +
-                             test_appointment.id)
+    def test_verbose_name_plural(self):
+        """
+        The pluralization of Appointment should be Appointments
+        """
+        self.assertEqual(str(Appointment._meta.verbose_name_plural), 'appointments')
