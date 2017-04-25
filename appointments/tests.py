@@ -37,7 +37,9 @@ class AppointmentsTests(TestCase):
             price=15.00,
             duration=900,
             category=CATEGORIES.FOTODEPILACION,
-            description='¿Eres de maquillaje natural o tienes poco tiempo? Entonces esto es para tí, para cualquier ocasión, un toque de luz en tu rostro, un delineado suave, color en tus labios ¡y listo!'
+            description='¿Eres de maquillaje natural o tienes poco tiempo? Entonces esto es para tí, ' +
+                        'para cualquier ocasión, un toque de luz en tu rostro, un delineado suave, ' +
+                        'color en tus labios ¡y listo!'
         )
 
         self.invoice = Invoice.objects.create(
@@ -46,6 +48,7 @@ class AppointmentsTests(TestCase):
         )
 
         self.appointment = Appointment.objects.create(
+            id=1,
             service=self.service,
             date=timezone.now(),
             client=self.client,
@@ -58,4 +61,4 @@ class AppointmentsTests(TestCase):
         """
         The pluralization of Appointment should be Appointments
         """
-        self.assertEqual(str(Appointment._meta.verbose_name_plural), 'appointments')
+        self.assertEqual(self.invoice.client.name, self.client.name)
