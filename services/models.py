@@ -31,3 +31,12 @@ class Service(models.Model):
 
     def __unicode__(self):
         return self.category + ': ' + self.name
+
+    """def __iter__(self):
+        return [self.name,
+                self.price,
+                self.duration,
+                self.category,
+                self.description]"""
+    def __iter__(self):
+        return iter(self._values)

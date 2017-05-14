@@ -9,6 +9,7 @@ from .models import Appointment, APPOINTMENT_STATES
 
 
 class AppointmentsTests(TestCase):
+    """ Initial setUp for future tests """
     def setUp(self):
         self.client = Client.objects.create(
           dni='12345678t',
@@ -48,7 +49,6 @@ class AppointmentsTests(TestCase):
         )
 
         self.appointment = Appointment.objects.create(
-            id=1,
             service=self.service,
             date=timezone.now(),
             client=self.client,
@@ -56,9 +56,3 @@ class AppointmentsTests(TestCase):
             invoice=self.invoice,
             notes='Test'
         )
-
-    def test_verbose_name_plural(self):
-        """
-        The pluralization of Appointment should be Appointments
-        """
-        self.assertEqual(self.invoice.client.name, self.client.name)
