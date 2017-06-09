@@ -36,12 +36,12 @@ class Product(models.Model):
         return self.name
 
 class PrepaidCard(Product):
-    """ Payment Method model. Multi-table inheritance. """
+    """ Prepaid Card model. Multi-table inheritance. """
     available_amount = models.DecimalField(default=0, max_digits=5, decimal_places=2)
-    client = models.OneToOneField(
+    client = models.ForeignKey(
         Client,
         on_delete=models.CASCADE
     )
 
     def __unicode__(self):
-        return self.name
+        return self.name + ' ' + str(self.id) + ' ' + self.client.name + ' ' + str(self.client.id)
